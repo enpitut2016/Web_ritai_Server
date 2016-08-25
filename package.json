@@ -1,5 +1,6 @@
 {
-  "name": "web_ritai_server",
+    "name": "web_ritai_server",
+    "main": "index.js",
   "version": "0.0.1",
   "dependencies": {
     "express": "^4.14.0"
