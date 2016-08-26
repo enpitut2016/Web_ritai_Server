@@ -6,11 +6,26 @@ var rootUrl = "http://www.tenki.jp";
 app.get('/', function (req, res) {
     var pref = req.query.pref;
     var city = req.query.city;
-
-    var url = getLocationPage(pref, city);
+    var url = 'non';
+    
+    if(pref == '北海道') {
+	var hokkaidoUrls = ['http://www.tenki.jp/forecast/1/2/',
+			    'http://www.tenki.jp/forecast/1/3/',
+			    'http://www.tenki.jp/forecast/1/1/',
+			    'http://www.tenki.jp/forecast/1/4/'
+			   ];
+	for(var i = 0; i < 4; i++){
+	    url = getCityPage(hokkaidoUrls[i], city);
+	    if(typeof url !== "undefined") {
+		break;
+	    }
+	}
+    } else {
+	url = getLocationPage(pref, city);
+    }
     var weathers = getWeatherData(url);
     var data = {pref:pref, city:city, weathers:weathers};
-    res.send(data);
+    res.json(data);
 });
 
 function getPrefPage(pref) {
@@ -28,13 +43,18 @@ function getPrefPage(pref) {
 function getCityPage(prefPageUrl, city) {
     var cityPageUrl;
     var prefSc = cheerio.fetchSync(prefPageUrl);
+    
     prefSc.$('.weatherWaveBox ul li a').each(function(tag){
 	if(prefSc.$(this).text() == city){
 	    cityPageUrl = prefSc.$(this).attr('href');
 	}
     });
     console.log(cityPageUrl);
-    return rootUrl + cityPageUrl;
+    if(typeof cityPageUrl === "undefined") {
+	return;
+    } else {
+	return rootUrl + cityPageUrl;
+    }
 }
 
 function getLocationPage(pref, city){
