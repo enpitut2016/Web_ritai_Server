@@ -12,6 +12,6 @@ city:市町村
 {
 	pref:"都道府県",
 	city:"市町村",
-	wheather:[{hour:"時間", prop:"降水確率", temperature:"温度"}, { }, …, { }],
+	wheathers:[{hour:"時間", prop:"降水確率", temperature:"温度"}, { }, …, { }],
 }
 ```
