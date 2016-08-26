@@ -18,6 +18,7 @@ function getPrefPage(pref) {
 	    prefPageUrl = prefSc.$(this).attr('href');
 	}
     });
+    console.log(prefPageUrl);
     return rootUrl + prefPageUrl;
 }
 
@@ -29,6 +30,7 @@ function getCityPage(prefPageUrl, city) {
 	    cityPageUrl = citySc.$(this).attr('href');
 	}
     });
+    console.log(cityPageUrl);
     return rootUrl + cityPageUrl;
 }
 
