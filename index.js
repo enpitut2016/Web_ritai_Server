@@ -44,23 +44,23 @@ function getLocationPage(pref, city){
 }
 
 function getWeatherData(url) {
-//    url = 'http://www.tenki.jp/forecast/3/11/4020/8220.html';
     var citySc = cheerio.fetchSync(url);
-    //    var hours = citySc.$('tr.hour td span');
+
     var hours = [];
     citySc.$('tr.hour td span').each(function(tag){
 	hours.push(citySc.$(this).text());
     });
-//    var temperatures = citySc.$('tr.temperature td span');
+
     var temperatures = [];
     citySc.$('tr.temperature td span').each(function(tag){
 	temperatures.push(citySc.$(this).text());
     });
-    //var probPrecips = citySc.$('tr.prob_precip td span');
+
     var probPrecips = [];
     citySc.$('tr.prob_precip td span').each(function(tag){
 	probPrecips.push(citySc.$(this).text());
     });
+
     var weathers = [];
     var weather;
     for(var i = 0; i < 8; i++){
@@ -73,5 +73,4 @@ function getWeatherData(url) {
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
     console.log("Listening on " + port);
-//    getWeatherData("a");
 });
